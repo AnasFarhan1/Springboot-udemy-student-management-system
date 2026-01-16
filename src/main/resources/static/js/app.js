@@ -181,3 +181,8 @@ function showError(message) {
         errorDiv.style.display = 'none';
     }, 3000);
 }
+
+function backToDashboard() {
+    window.location.href = 'http://localhost:8080/index.html';
+
+}

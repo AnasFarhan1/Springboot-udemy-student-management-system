@@ -3,72 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Management Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-<div class="container">
-    <h1>🎓 Student Management System</h1>
+<!-- Header -->
+<header class="header">
+    <div class="header-content">
+        <h1>🏢 Management System</h1>
+        <div class="user-info">
+            <span>Welcome, Admin</span>
+            <div class="user-avatar">A</div>
+        </div>
+    </div>
+</header>
 
-    <div class="success-message" id="successMessage"></div>
-    <div class="error-message" id="errorMessage"></div>
+<!-- Navigation Tabs -->
+<nav class="nav-container">
+    <ul class="nav-tabs">
+        <li>
+            <a href="#" data-page="dashboard" class="active">
+                <span class="nav-icon">🏠</span>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="page/student.html" data-page="students">
+                <span class="nav-icon">🎓</span>
+                <span>Students</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-page="merchants">
+                <span class="nav-icon">🏪</span>
+                <span>Merchants</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-page="members">
+                <span class="nav-icon">👥</span>
+                <span>Members</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-page="transactions">
+                <span class="nav-icon">💳</span>
+                <span>Transaction Monitoring</span>
+            </a>
+        </li>
+        <li>
+            <a href="#" data-page="reports">
+                <span class="nav-icon">📊</span>
+                <span>Reports</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 
-    <!-- Add/Edit Student Form -->
-    <div class="form-section">
-        <h2 id="formTitle">Add New Student</h2>
-        <form id="studentForm">
-            <input type="hidden" id="studentId">
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Dashboard Page (Default) -->
+    <div id="dashboard" class="content-page active">
+        <div class="welcome-section">
+            <h2>Welcome to Your Dashboard</h2>
+            <p>Manage your students, merchants, members, and monitor transactions all in one place.</p>
+        </div>
 
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" placeholder="Enter student name" required>
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="studentCount">-</div>
+                <div class="stat-label">Total Students</div>
             </div>
-
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" placeholder="Enter student email" required>
+            <div class="stat-card" style="border-left-color: #2ecc71;">
+                <div class="stat-value" id="merchantCount" style="color: #2ecc71;">-</div>
+                <div class="stat-label">Active Merchants</div>
             </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="department">Department:</label>
-                    <input type="text" id="department" placeholder="Enter department">
-                </div>
-
-                <div class="form-group">
-                    <label for="yearOfEnrollment">Year of Enrollment:</label>
-                    <input type="number" id="yearOfEnrollment" placeholder="e.g., 2024">
-                </div>
+            <div class="stat-card" style="border-left-color: #f39c12;">
+                <div class="stat-value" id="memberCount" style="color: #f39c12;">-</div>
+                <div class="stat-label">Registered Members</div>
             </div>
+            <div class="stat-card" style="border-left-color: #e74c3c;">
+                <div class="stat-value" id="transactionCount" style="color: #e74c3c;">-</div>
+                <div class="stat-label">Transactions Today</div>
+            </div>
+        </div>
 
-            <button type="submit" id="submitBtn">Add Student</button>
-            <button type="button" id="cancelBtn" class="btn-cancel" onclick="cancelEdit()" style="display:none;">Cancel</button>
-        </form>
+        <!-- Quick Access Cards -->
+        <h2 style="margin-bottom: 20px; color: #333;">Quick Access</h2>
+        <div class="dashboard-grid">
+            <a href="#" data-page="students" class="dashboard-card">
+                <div class="card-icon blue">🎓</div>
+                <h3 class="card-title">Student Management</h3>
+                <p class="card-description">Add, edit, and manage student records and information.</p>
+            </a>
+
+            <a href="#" data-page="merchants" class="dashboard-card">
+                <div class="card-icon green">🏪</div>
+                <h3 class="card-title">Merchant Management</h3>
+                <p class="card-description">Manage merchant accounts, approvals, and settings.</p>
+            </a>
+
+            <a href="#" data-page="members" class="dashboard-card">
+                <div class="card-icon orange">👥</div>
+                <h3 class="card-title">Member Management</h3>
+                <p class="card-description">View and manage member profiles and activities.</p>
+            </a>
+
+            <a href="#" data-page="transactions" class="dashboard-card">
+                <div class="card-icon red">💳</div>
+                <h3 class="card-title">Transaction Monitoring</h3>
+                <p class="card-description">Monitor and track all transactions in real-time.</p>
+            </a>
+
+            <a href="#" data-page="reports" class="dashboard-card">
+                <div class="card-icon blue">📊</div>
+                <h3 class="card-title">Reports & Analytics</h3>
+                <p class="card-description">Generate detailed reports and view analytics.</p>
+            </a>
+        </div>
     </div>
 
-    <!-- Students List -->
-    <div>
-        <h2>All Students</h2>
-        <table id="studentsTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Department</th>
-                <th>Year</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody id="studentsBody">
-            <tr>
-                <td colspan="6" class="empty-state">Loading students...</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+    <!-- Students Page -->
+    <div id="students" class="content-page">
+        <div class="container">
+            <h1>🎓 Student Management System</h1>
 
+            <div class="success-message" id="successMessage"></div>
+            <div class="error-message" id="errorMessage"></div>
+
+            <!-- Add/Edit Student Form -->
+            <div class="form-section">
+                <h2 id="formTitle">Add New Student</h2>
+                <form id="studentForm">
+                    <input type="hidden" id="studentId">
+
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" placeholder="Enter student name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" placeholder="Enter student email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="department">Department:</label>
+                            <input type="text" id="department" placeholder="Enter department">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="yearOfEnrollment">Year of Enrollment:</label>
+                            <input type="number" id="yearOfEnrollment" placeholder="e.g., 2024">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn">Add Student</button>
+                    <button type="button" id="cancelBtn" class="btn-cancel" onclick="cancelEdit()" style="display:none;">Cancel</button>
+                </form>
+            </div>
+
+            <!-- Students List -->
+            <div>
+                <h2>All Students</h2>
+                <table id="studentsTable">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Department</th>
+                        <th>Year</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="studentsBody">
+                    <tr>
+                        <td colspan="6" class="empty-state">Loading students...</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Merchants Page (Placeholder) -->
+    <div id="merchants" class="content-page">
+        <div class="container">
+            <h1>🏪 Merchant Management</h1>
+            <div class="welcome-section">
+                <h2>Merchant Management Coming Soon</h2>
+                <p>This section will allow you to manage merchant accounts, approvals, and settings.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Members Page (Placeholder) -->
+    <div id="members" class="content-page">
+        <div class="container">
+            <h1>👥 Member Management</h1>
+            <div class="welcome-section">
+                <h2>Member Management Coming Soon</h2>
+                <p>This section will allow you to view and manage member profiles and activities.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transactions Page (Placeholder) -->
+    <div id="transactions" class="content-page">
+        <div class="container">
+            <h1>💳 Transaction Monitoring</h1>
+            <div class="welcome-section">
+                <h2>Transaction Monitoring Coming Soon</h2>
+                <p>This section will allow you to monitor and track all transactions in real-time.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reports Page (Placeholder) -->
+    <div id="reports" class="content-page">
+        <div class="container">
+            <h1>📊 Reports & Analytics</h1>
+            <div class="welcome-section">
+                <h2>Reports & Analytics Coming Soon</h2>
+                <p>This section will allow you to generate detailed reports and view analytics.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="js/dashboard.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
